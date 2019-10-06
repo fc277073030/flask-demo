@@ -1,4 +1,4 @@
-FROM python:3.7
+FROM registry.cn-hangzhou.aliyuncs.com/tekton-pipelines/python:3.7
 WORKDIR /usr/src/app
 COPY requirements.txt /usr/src/app
 RUN pip install --no-cache-dir -r requirements.txt -i https://pypi.tuna.tsinghua.edu.cn/simple
