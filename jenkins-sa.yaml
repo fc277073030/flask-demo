@@ -1,0 +1,25 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: flask-demo
+
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: my-jenkins
+  namespace: flask-demo
+
+---
+apiVersion: rbac.authorization.k8s.io/v1beta1
+kind: RoleBinding
+metadata:
+  name: my-jenkins
+  namespace: flask-demo
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: admin
+subjects:
+- kind: ServiceAccount
+  name: my-jenkins
