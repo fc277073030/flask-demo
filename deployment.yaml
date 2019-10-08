@@ -1,0 +1,21 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: flask-demo
+  namespace: flask-demo
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: flask-demo-pod
+    spec:
+      containers:
+        - name: flask-demo-pod
+          image: fc277073030/flask-demo:v3  
+          imagePullPolicy: Always
+ 
+          ports:
+            - containerPort: 5000
+          command: ["/bin/sh"]
+          args: ["-c", "python app.py"]
