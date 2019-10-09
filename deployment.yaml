@@ -2,7 +2,6 @@ apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
   name: flask-demo
-  namespace: flask-demo
 spec:
   replicas: 1
   template:
