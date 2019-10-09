@@ -12,9 +12,8 @@ spec:
     spec:
       containers:
         - name: flask-demo-pod
-          image: fc277073030/flask-demo:v3  
+          image: fc277073030/flask-demo
           imagePullPolicy: Always
- 
           ports:
             - containerPort: 5000
           command: ["/bin/sh"]
