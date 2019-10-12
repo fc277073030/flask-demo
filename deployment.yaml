@@ -11,7 +11,7 @@ spec:
     spec:
       containers:
         - name: flask-demo-pod
-          image: fc277073030/flask-demo
+          image: registry.cn-hangzhou.aliyuncs.com/tekton-pipelines/flask-demo
           imagePullPolicy: Always
           ports:
             - containerPort: 5000
