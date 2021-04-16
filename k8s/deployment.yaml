@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hello-python     # 自定义名称
+spec:
+  selector:
+    matchLabels:
+      app: hello-python   # lable 标签
+  replicas: 3   # pod 数量
+  template:
+    metadata:
+      labels:
+        app: hello-python   #  lable 标签同上
+    spec:
+      containers:
+      - name: hello-python   # 自定义容器名称
+        image: fc277073030/flask-demo:v0.0.1   # 镜像地址
+        imagePullPolicy: Always   # 拉取策略，总是拉取，还有其它策略
+        ports:
+        - containerPort: 5000   #容器端口
+        volumeMounts:
+          - mountPath: /app/config   # 需要挂载的文件目录
+            name: config
+      volumes:
+        - name: config
+          configMap:
+            name: config
