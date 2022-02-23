@@ -1,4 +1,4 @@
-FROM python:3.9.4-alpine3.12
+FROM harbor.arnoo.com/library/python:3.10-alpine3.15
 
 WORKDIR /app
 
