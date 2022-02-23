@@ -9,19 +9,38 @@ metadata:
     some-label: some-label-value
 spec:
   containers:
-  - name: busybox
-    image: busybox
+  - name: kaniko
+    image: harbor.arnoo.com/library/kaniko/executor:debug
+    imagePullPolicy: IfNotPresent
     command:
-    - cat
+    - /busybox/cat
     tty: true
+    volumeMounts:
+      - name: jenkins-docker-cfg
+        mountPath: /kaniko/.docker
+  volumes:
+  - name: jenkins-docker-cfg
+    projected:
+      sources:
+      - secret:
+          name: kaniko-secret
+          items:
+            - key: .dockerconfigjson
+              path: config.json
 """
     }
   }
+  environment {
+    APP_NAME = 'flask-demo'
+    IMAGE_NAME = 'harbor.arnoo.com/devops/flask-demo'
+    
+  }
   stages {
-    stage('Run maven') {
+    stage('Build with Kaniko') {
       steps {
-        container('busybox') {
-          sh '/bin/busybox'
+        container('kaniko') {
+          sh 'ls -l'
+          sh '/kaniko/executor -f `pwd`/Dockerfile -c `pwd` --insecure --skip-tls-verify --cache=true --destination=$IMAGE_NAME:$GIT_COMMIT'
         }
       }
     }
