@@ -32,7 +32,7 @@ spec:
   }
   environment {
     APP_NAME = 'flask-demo'
-    IMAGE_NAME = 'harbor.arnoo.com/devops/flask-demo'
+    IMAGE_NAME = 'fc277073030/flask-demo'
     
   }
   stages {
